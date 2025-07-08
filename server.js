@@ -165,7 +165,7 @@ async function sendCW(message, messageId, roomId, acId) {
   try {
     const ms = `[rp aid=${acId} to=${roomId}-${messageId}][pname:${acId}]ãã\n${message}`;
     await axios.post(
-      `https://api.chatwork.com/v2/rooms/${CHATWORK_ROOM_ID}/messages`,
+      `https://api.chatwork.com/v2/rooms/${roomId}/messages`,
       new URLSearchParams({ body: ms }),
       {
         headers: {
