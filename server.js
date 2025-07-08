@@ -1,31 +1,16 @@
 "use strict";
 const express = require("express");
-let app = express();
-const cluster = require("cluster");
-const os = require("os");
 const compression = require("compression");
-const numClusters = os.cpus().length;
-if (cluster.isMaster) {
-  for (let i = 0; i < numClusters; i++) {
-    cluster.fork();
-  }
-  cluster.on("exit", (worker, code, signal) => {
-    cluster.fork();
-  });
-} else {
-  app.use(compression());
-  app.listen(3000, () => {
-    console.log(`${process.pid} started`);
-  });
-}
-
+let app = express();
 const axios = require('axios');
-const ytsr = require('ytsr')
+const ytsr = require('ytsr');
 
+const port = process.env.PORT || 3000;
 const CHATWORK_API_TOKEN = process.env.CWapitoken;
 const YOUTUBE_URL = /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([\w\-]+)/;
 
 app.use(express.json());
+app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 
 let apis = null;
@@ -214,9 +199,8 @@ async function getwakametube(message, messageId, roomId, accountId) {
     const videoId = match[1];
 
     try {
-      const response = await axios.get(`${wakametube}${videoId}`,);
-      const videoData = response.data;
-      const streamUrl = videoData.streamUrl;
+      const videoData = await getYouTube(videoId3);
+      const streamUrl = videoData.stream_url;
       const videoTitle = videoData.videoTitle;
       const sssl = `https://www.youtube-nocookie.com/embed/${videoId}`
       await sendCW(`${videoTitle}\n${streamUrl}\n\nこちらのURLでも再生できるかもしれません\n${sssl}`, messageId, roomId, accountId);
@@ -231,3 +215,8 @@ async function getwakametube(message, messageId, roomId, accountId) {
   }
   return;
 }
+
+
+app.listen(port, () => {
+  console.log(`listening on port ${port}`)
+})
