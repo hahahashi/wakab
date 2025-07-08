@@ -21,7 +21,6 @@ if (cluster.isMaster) {
 
 const axios = require('axios');
 const ytsr = require('ytsr')
-const bodyParser = require('body-parser');
 
 const CHATWORK_API_TOKEN = process.env.CWapitoken;
 const YOUTUBE_URL = /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([\w\-]+)/;
