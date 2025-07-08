@@ -24,6 +24,7 @@ const ytsr = require('ytsr')
 const bodyParser = require('body-parser');
 
 const CHATWORK_API_TOKEN = process.env.CWapitoken;
+const YOUTUBE_URL = /(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([\w\-]+)/;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -81,6 +82,7 @@ async function ggvideo(videoId) {
 
     if (Date.now() - startTime >= MAX_TIME) {
       throw new Error("接続がタイムアウトしました");
+      break;
     }
   }
   throw new Error("動画を取得する方法が見つかりません");
@@ -191,7 +193,7 @@ async function getwakametube(message, messageId, roomId, accountId) {
   　　　　.then(videoId => {
          return videoId;
          });
-     const videoData = await getYouTube(videoId);
+     const videoData = await getYouTube(videoId3);
       
      const streamUrl = videoData.stream_url;
      const videoTitle = videoData.videoTitle;
@@ -226,7 +228,7 @@ async function getwakametube(message, messageId, roomId, accountId) {
       return;
     }
   } else {
-    await sendchatwork(`[rp aid=${accountId} to=${roomId}-${messageId}][pname:${accountId}]さん\nURLが無効です。正しいYouTubeのURLを入力してください。`, roomId);
+    await sendCW(`URLが無効です。正しいYouTubeのURLを入力してください。`, roomId);
   }
   return;
 }
