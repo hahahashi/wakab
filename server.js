@@ -199,7 +199,7 @@ async function getwakametube(message, messageId, roomId, accountId) {
     const videoId = match[1];
 
     try {
-      const videoData = await getYouTube(videoId3);
+      const videoData = await getYouTube(videoId);
       const streamUrl = videoData.stream_url;
       const videoTitle = videoData.videoTitle;
       const sssl = `https://www.youtube-nocookie.com/embed/${videoId}`
