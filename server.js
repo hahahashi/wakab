@@ -154,7 +154,7 @@ app.all("/", (req, res) => {
 app.post("/webhook", (req, res) => {
   const { body, message_id: messageId,account_id: accountId, room_id: roomId } = req.body.webhook_event;
 
-  if (accountId === 9905801) {
+  if (accountId === 10514686) {
     return res.sendStatus(200);
   }
 
