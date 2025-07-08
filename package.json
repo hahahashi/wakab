@@ -1,16 +1,26 @@
 {
-  "scripts": {
-    "start": "node server.js"
-  },
+  "name": "wakametube",
+  "version": "1.0.8",
+  "main": "server.js",
+  "license": "CC-BY-4.0",
   "dependencies": {
     "express": "^4.21.2",
-    "axios": "latest",
-    "compression": "^1.7.5",
-    "crypto": "^1.0.1"
+    "compression": "^1.8.0",
+    "axios": "^1.8.1",
+    "ytsr": "latest",
+    "cors": "^2.8.5"
   },
-  "narflinger": {
-    "basenames": [
-      "f6854wxlv8i0i88bzfn1zl8ifw8c3i0y-nodejs-20.11.1"
-    ]
+  "description": "wakame",
+  "engines": {
+    "node": "20.x"
+  },
+  "author": "wakame02",
+  "bugs": {
+    "email": "23h11008@gmail.com"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
