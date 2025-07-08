@@ -163,7 +163,7 @@ app.post("/webhook", (req, res) => {
 
 async function sendCW(message, messageId, roomId, acId) {
   try {
-    const ms = `[rp aid=${acId} to=${roomId}-${messageId}][pname:${acId}]ãã\n${message}`;
+    const ms = `[rp aid=${acId} to=${roomId}-${messageId}][pname:${acId}]さん\n${message}`;
     await axios.post(
       `https://api.chatwork.com/v2/rooms/${roomId}/messages`,
       new URLSearchParams({ body: ms }),
@@ -174,9 +174,8 @@ async function sendCW(message, messageId, roomId, acId) {
         },
       }
     );
-    console.log("ã¡ãã»ã¼ã¸éä¿¡æå");
   } catch (error) {
-    console.error("Chatworkã¸ã®ã¡ãã»ã¼ã¸éä¿¡ã¨ã©ã¼:", error.response?.data || error.message);
+    console.error("えらー", error.response?.data || error.message);
   }
 }
 
